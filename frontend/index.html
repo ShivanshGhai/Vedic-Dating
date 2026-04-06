@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ashtakoota — Vedic Compatibility</title>
+<title>Ashtakoota — Stop Swiping Blindly</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
@@ -412,10 +412,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
     <div class="hero">
       <div class="hero-text">
-        <div class="hero-kicker">Intentional dating, not slot-machine swiping</div>
+        <div class="hero-kicker">Tired of playing games? Good.</div>
         <h1>Stop Swiping Blindly<em>Date with context.</em></h1>
         <p class="hero-subtitle">Ashtakoota helps people slow down, show up honestly, and understand romantic compatibility before wasting weeks on another shallow match.</p>
-        <p class="hero-story">This is not an app built only for one community, one ethnicity, or one kind of dater. If you want something more grounded than endless swiping, you can build a real profile, state your intent clearly, and use astrological compatibility as one meaningful layer, not the whole story.</p>
+        <p class="hero-story">Ghosting, breadcrumbing, orbiting, mixed signals, “let's just vibe” energy. Modern dating has a language for confusion and almost no structure for clarity. Ashtakoota is for people who want to exit the loop, say what they want, and see whether a connection has real long-term potential before it turns into another situationship.</p>
         <div class="hero-actions">
           <button class="btn-lg primary" onclick="openAuth('register')">Create my profile</button>
           <button class="btn-lg outline" onclick="openAuth('login')">I already have an account</button>
@@ -482,7 +482,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
       <div class="features-inner">
         <div class="section-label">How it works</div>
         <div class="section-title">Simple enough to trust. Serious enough to matter.</div>
-        <div class="section-copy">You do not need to know astrology to use Ashtakoota. The app turns your birth details and profile intent into something easy to understand, so you can move from attraction to actual compatibility without friction.</div>
+        <div class="section-copy">You do not need to know astrology to use Ashtakoota. You just need to be done with vague intentions, hot-and-cold behavior, and matching without context. The app turns your profile and birth details into a clearer dating process that is easier to trust.</div>
         <div class="features-grid">
           <div class="feature-card"><div class="feature-num">01</div><div class="feature-title">Build a profile people can actually read</div><div class="feature-desc">Share who you are, where you are from, what kind of relationship you want, and the kind of person you hope to meet.</div></div>
           <div class="feature-card"><div class="feature-num">02</div><div class="feature-title">Browse people with context</div><div class="feature-desc">Instead of anonymous swiping, you see intent, profile signals, and a clearer sense of whether someone is aligned with your goals.</div></div>
@@ -571,7 +571,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
         <div class="cta-copy">
           <div class="section-label" style="color:var(--gold-light);">For people done with shallow matching</div>
           <h3>Make a profile that says something real.</h3>
-          <p>Join people who want more than a dopamine loop. Build a profile with actual intent, unlock meaningful compatibility signals, and give the next connection a better chance of becoming something lasting.</p>
+          <p>Join people who are over the algorithm, over the ambiguity, and over pretending chaos is romantic. Build a profile with actual intent, unlock meaningful compatibility signals, and give the next connection a better shot at becoming something real.</p>
         </div>
         <div class="cta-actions">
           <button class="btn-lg primary" onclick="openAuth('register')">Start my profile</button>
@@ -591,8 +591,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
     <!-- LOGIN -->
     <div id="auth-login">
-      <h2>Welcome back</h2>
-      <p class="modal-sub">Sign in to your Ashtakoota account</p>
+      <h2>Back for something real?</h2>
+      <p class="modal-sub">Sign in and pick up where the games stop and the clarity starts.</p>
       <div class="form-error" id="login-error"></div>
       <div class="form-group"><label>Email</label><input type="email" id="login-email" placeholder="your@email.com" /></div>
       <div class="form-group"><label>Password</label><input type="password" id="login-password" placeholder="••••••••" /></div>
@@ -603,8 +603,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
     <!-- REGISTER -->
     <div id="auth-register" style="display:none;">
-      <h2>Join Ashtakoota</h2>
-      <p class="modal-sub">Create a relationship-ready profile. We use your birth details for Vedic matching, but your profile should still feel human.</p>
+      <h2>Build a profile worth reading</h2>
+      <p class="modal-sub">This is where you trade swipe-bait for substance. We use your birth details for compatibility, but your intent and character still lead.</p>
       <div class="form-error" id="register-error"></div>
       <div class="form-row">
         <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="arjun_v" /></div>
@@ -669,7 +669,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
           <div class="astro-tags-inline" id="astro-tags-preview"></div>
         </div>
       </div>
-      <button class="form-btn" id="register-btn" onclick="doRegister()">Create profile &amp; see my chart</button>
+      <button class="form-btn" id="register-btn" onclick="doRegister()">Start my profile &amp; see my chart</button>
       <p class="form-switch">Already have an account? <a onclick="switchAuth('login')">Sign in</a></p>
     </div>
   </div>
@@ -682,9 +682,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
   <nav>
     <div class="nav-logo" onclick="showSection('dashboard')">Ashta<span>koota</span></div>
     <div class="nav-links">
-      <button class="nav-link" onclick="showSection('dashboard')">Dashboard</button>
-      <button class="nav-link" onclick="showSection('browse')">Browse</button>
-      <button class="nav-link" onclick="showSection('matches')">Matches</button>
+      <button class="nav-link" onclick="showSection('dashboard')">Overview</button>
+      <button class="nav-link" onclick="showSection('browse')">Discover</button>
+      <button class="nav-link" onclick="showSection('matches')">Worth It</button>
       <button class="nav-link" onclick="showSection('chat')">Chat</button>
       <button class="nav-link" onclick="showSection('requests')">Requests <span id="req-badge" style="display:none;background:var(--accent-red);color:#fff;font-size:10px;border-radius:10px;padding:1px 6px;margin-left:4px;"></span></button>
       <button class="nav-link" onclick="showSection('history')">History</button>
@@ -704,9 +704,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
     <div class="sidebar">
       <div class="sidebar-profile" id="sidebar-profile"></div>
       <div class="sidebar-menu">
-        <button class="sidebar-item active" onclick="showSection('dashboard')"><span class="sidebar-icon">✦</span> Dashboard</button>
-        <button class="sidebar-item" onclick="showSection('browse')"><span class="sidebar-icon">◎</span> Browse</button>
-        <button class="sidebar-item" onclick="showSection('matches')"><span class="sidebar-icon">♥</span> Matches</button>
+        <button class="sidebar-item active" onclick="showSection('dashboard')"><span class="sidebar-icon">✦</span> Overview</button>
+        <button class="sidebar-item" onclick="showSection('browse')"><span class="sidebar-icon">◎</span> Discover</button>
+        <button class="sidebar-item" onclick="showSection('matches')"><span class="sidebar-icon">♥</span> Worth It</button>
         <button class="sidebar-item" onclick="showSection('chat')"><span class="sidebar-icon">✉</span> Chat</button>
         <div class="sidebar-divider"></div>
         <button class="sidebar-item" onclick="showSection('requests')"><span class="sidebar-icon">✧</span> Requests</button>
@@ -725,7 +725,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
           <div id="verify-banner-text">Verify your email to unlock likes, requests, chat, and reports.</div>
           <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="resendVerification()">Resend verification</button>
         </div>
-        <div class="section-header"><h2>Dashboard</h2><p>Your dating overview, guided by compatibility</p></div>
+        <div class="section-header"><h2>Your Clarity Board</h2><p>The signal that matters right now, without the swipe-noise.</p></div>
         <div class="dash-grid">
           <div class="stat-card"><div class="stat-num" id="stat-matches">—</div><div class="stat-label">Mutual matches</div></div>
           <div class="stat-card"><div class="stat-num" id="stat-readings">—</div><div class="stat-label">Readings done</div></div>
@@ -733,11 +733,11 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
         </div>
         <div class="dash-row">
           <div class="card">
-            <div class="card-title">Aligned profiles</div>
+            <div class="card-title">People worth your attention</div>
             <div class="profiles-grid" id="suggested-grid"><div class="empty"><div class="spinner"></div></div></div>
           </div>
           <div class="card">
-            <div class="card-title">Most promising matches</div>
+            <div class="card-title">Strongest alignment so far</div>
             <div id="best-matches-list"><div class="empty"><div class="spinner"></div></div></div>
           </div>
         </div>
@@ -745,7 +745,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
       <!-- BROWSE -->
       <div class="section" id="sec-browse">
-        <div class="section-header"><h2>Browse</h2><p>Only profiles scoring 25 to 36 are recommended to you</p></div>
+        <div class="section-header"><h2>People, Not Playing Cards</h2><p>Profiles with context, intent, and compatibility, not just another face in a stack.</p></div>
         <div class="filter-bar">
           <input class="filter-input" id="browse-search" placeholder="Search by username or location…" oninput="debounceFilter()" />
           <select class="filter-select" id="browse-intent" onchange="loadBrowse()">
@@ -776,13 +776,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
       <!-- MATCHES -->
       <div class="section" id="sec-matches">
-        <div class="section-header"><h2>Matches</h2><p>Your mutual connections</p></div>
+        <div class="section-header"><h2>Worth Taking Seriously</h2><p>Mutual connections that earned more than a passing glance.</p></div>
         <div id="match-list"><div class="empty"><div class="spinner"></div></div></div>
       </div>
 
       <!-- CHAT -->
       <div class="section" id="sec-chat">
-        <div class="section-header"><h2>Chat</h2><p>Messages with your matches</p></div>
+        <div class="section-header"><h2>Now Say Something Real</h2><p>Conversations with people who cleared the first layer of chaos.</p></div>
         <div class="chat-layout">
           <div class="chat-list">
             <div class="chat-list-header">Conversations</div>
@@ -796,20 +796,20 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
       <!-- REQUESTS -->
       <div class="section" id="sec-requests">
-        <div class="section-header"><h2>Requests</h2><p>Compatibility reading requests</p></div>
+        <div class="section-header"><h2>Who Wants More Context?</h2><p>Reading requests from people who want more than flirt-now, figure-it-out-later.</p></div>
         <div style="margin-bottom:1.5rem;">
-          <div class="card-title" style="margin-bottom:.75rem;">Incoming (expires in 48h)</div>
+          <div class="card-title" style="margin-bottom:.75rem;">Incoming signals (expires in 48h)</div>
           <div id="incoming-requests"><div class="empty"><div class="spinner"></div></div></div>
         </div>
         <div>
-          <div class="card-title" style="margin-bottom:.75rem;">Sent by you</div>
+          <div class="card-title" style="margin-bottom:.75rem;">Signals you sent</div>
           <div id="sent-requests"><div class="empty"><div class="spinner"></div></div></div>
         </div>
       </div>
 
       <!-- HISTORY -->
       <div class="section" id="sec-history">
-        <div class="section-header"><h2>Score History</h2><p>All your compatibility readings</p></div>
+        <div class="section-header"><h2>Receipts, Not Guesswork</h2><p>Your saved compatibility readings, ready when you want the full picture again.</p></div>
         <div class="history-list" id="history-list"><div class="empty"><div class="spinner"></div></div></div>
       </div>
 
@@ -870,7 +870,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
 
       <!-- MY PROFILE -->
       <div class="section" id="sec-my-profile">
-        <div class="section-header"><h2>My Profile</h2><p>Your astrological identity</p></div>
+        <div class="section-header"><h2>Your Dating Case</h2><p>The profile people read when they want more than chemistry cosplay.</p></div>
         <div id="my-profile-content"></div>
       </div>
 

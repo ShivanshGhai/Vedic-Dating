@@ -428,12 +428,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,245,236,0.96);backdrop
         <div class="form-group"><label>Date of Birth</label><input type="date" id="reg-dob" /></div>
         <div class="form-group"><label>Time of Birth</label><input type="time" id="reg-tob" /></div>
       </div>
-      <div class="form-group"><label>Birth City / Location</label><input type="text" id="reg-location" placeholder="Mumbai, India" /></div>
-      <div class="form-row">
-        <div class="form-group"><label>Latitude</label><input type="number" id="reg-lat" step="0.0001" placeholder="19.0760" /></div>
-        <div class="form-group"><label>Longitude</label><input type="number" id="reg-lng" step="0.0001" placeholder="72.8777" /></div>
+      <div class="form-group" style="position:relative;">
+        <label>Birth City</label>
+        <input type="text" id="reg-location" placeholder="Start typing a city… e.g. Mumbai" autocomplete="off" oninput="citySearch(this.value)" />
+        <div id="city-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:.5px solid var(--border-strong);border-radius:0 0 8px 8px;z-index:50;max-height:200px;overflow-y:auto;box-shadow:var(--shadow);"></div>
+        <!-- Hidden fields auto-filled by city selection -->
+        <input type="hidden" id="reg-lat" value="" />
+        <input type="hidden" id="reg-lng" value="" />
+        <div id="city-confirm" style="display:none;margin-top:6px;font-size:12px;color:var(--accent-teal);">✓ <span id="city-confirm-text"></span></div>
+        <p class="form-hint">Select your birth city from the dropdown — coordinates fill automatically.</p>
       </div>
-      <p class="form-hint" style="margin-bottom:.75rem;">Find coordinates at <a href="https://latlong.net" target="_blank" style="color:var(--gold-dim);">latlong.net</a> — needed for accurate moon calculation.</p>
       <div class="form-group"><label>Bio <span style="font-weight:400;text-transform:none;">(optional)</span></label><textarea id="reg-bio" rows="2" placeholder="A little about you…" style="resize:vertical;"></textarea></div>
       <div class="form-group"><label>Profile Photo <span style="font-weight:400;text-transform:none;">(optional)</span></label><input type="file" id="reg-avatar" accept="image/*" /></div>
       <div id="astro-preview" style="display:none;">
@@ -645,6 +649,9 @@ let filterTimer = null;
 
 // ── API helper ────────────────────────────────────────
 async function api(method, path, body, isFormData) {
+  if (API.includes('your-backend.up.railway.app')) {
+    throw new Error('Backend URL not configured — open index.html and update the API constant with your Railway backend URL.');
+  }
   const opts = {
     method,
     headers: { Authorization: token ? `Bearer ${token}` : '' },
@@ -655,11 +662,18 @@ async function api(method, path, body, isFormData) {
   } else if (body && isFormData) {
     opts.body = body;
   }
-  const res = await fetch(API + path, opts);
-  if (res.status === 401) { doLogout(); return null; }
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || 'Request failed');
-  return data;
+  try {
+    const res = await fetch(API + path, opts);
+    if (res.status === 401) { doLogout(); return null; }
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `Server error ${res.status}`);
+    return data;
+  } catch (e) {
+    if (e.name === 'TypeError' && e.message.includes('fetch')) {
+      throw new Error('Cannot reach backend server — check that it is running and CORS allows this origin.');
+    }
+    throw e;
+  }
 }
 
 // ── Loading ───────────────────────────────────────────
@@ -714,11 +728,88 @@ function switchAuth(tab) {
   document.getElementById('auth-register').style.display = tab === 'register' ? '' : 'none';
 }
 
+// ── City autocomplete (OpenStreetMap Nominatim — no API key needed) ──────
+let _cityTimer = null;
+let _citySelected = false;
+
+async function citySearch(query) {
+  _citySelected = false;
+  document.getElementById('city-confirm').style.display = 'none';
+  document.getElementById('reg-lat').value = '';
+  document.getElementById('reg-lng').value = '';
+
+  const dropdown = document.getElementById('city-dropdown');
+  if (!query || query.length < 2) { dropdown.style.display = 'none'; return; }
+
+  clearTimeout(_cityTimer);
+  _cityTimer = setTimeout(async () => {
+    try {
+      const resp = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&limit=6&addressdetails=1&q=${encodeURIComponent(query)}`,
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      const results = await resp.json();
+      if (!results.length) {
+        dropdown.innerHTML = '<div style="padding:10px 14px;font-size:13px;color:var(--ink-soft);">No cities found — try a different spelling</div>';
+        dropdown.style.display = 'block';
+        return;
+      }
+      dropdown.innerHTML = results.map((r, i) => {
+        // Build a clean display name: city, state, country
+        const parts = [
+          r.address?.city || r.address?.town || r.address?.village || r.address?.municipality || r.name,
+          r.address?.state,
+          r.address?.country,
+        ].filter(Boolean);
+        const displayName = parts.join(', ');
+        return `<div
+          style="padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:.5px solid var(--border);transition:background .1s;"
+          onmouseenter="this.style.background='var(--parchment-mid)'"
+          onmouseleave="this.style.background=''"
+          onclick="selectCity('${displayName.replace(/'/g,"\\'")}', ${r.lat}, ${r.lon})"
+        >${displayName}</div>`;
+      }).join('');
+      dropdown.style.display = 'block';
+    } catch {
+      dropdown.style.display = 'none';
+    }
+  }, 350);
+}
+
+function selectCity(displayName, lat, lng) {
+  _citySelected = true;
+  document.getElementById('reg-location').value = displayName;
+  document.getElementById('reg-lat').value = parseFloat(lat).toFixed(6);
+  document.getElementById('reg-lng').value = parseFloat(lng).toFixed(6);
+  document.getElementById('city-dropdown').style.display = 'none';
+  const confirm = document.getElementById('city-confirm');
+  document.getElementById('city-confirm-text').textContent = `${displayName} (${parseFloat(lat).toFixed(4)}, ${parseFloat(lng).toFixed(4)})`;
+  confirm.style.display = 'block';
+}
+
+// Close city dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#reg-location') && !e.target.closest('#city-dropdown')) {
+    document.getElementById('city-dropdown').style.display = 'none';
+  }
+});
+
 // ── Register ──────────────────────────────────────────
 async function doRegister() {
   const btn = document.getElementById('register-btn');
   const err = document.getElementById('register-error');
   err.classList.remove('show');
+
+  // Validate city was selected from dropdown
+  const lat = document.getElementById('reg-lat').value;
+  const lng = document.getElementById('reg-lng').value;
+  if (!lat || !lng) {
+    err.textContent = 'Please select your birth city from the dropdown list so coordinates can be set automatically.';
+    err.classList.add('show');
+    document.getElementById('reg-location').focus();
+    return;
+  }
+
   btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Calculating chart…';
   try {
     const fd = new FormData();
@@ -728,8 +819,8 @@ async function doRegister() {
     fd.append('dateOfBirth',   document.getElementById('reg-dob').value);
     fd.append('timeOfBirth',   document.getElementById('reg-tob').value);
     fd.append('birthLocation', document.getElementById('reg-location').value.trim());
-    fd.append('latitude',      document.getElementById('reg-lat').value || '19.076');
-    fd.append('longitude',     document.getElementById('reg-lng').value || '72.877');
+    fd.append('latitude',      lat);
+    fd.append('longitude',     lng);
     fd.append('bio',           document.getElementById('reg-bio').value);
     const avatarFile = document.getElementById('reg-avatar').files[0];
     if (avatarFile) fd.append('avatar', avatarFile);

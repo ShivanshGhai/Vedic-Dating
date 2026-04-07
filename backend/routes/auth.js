@@ -228,7 +228,7 @@ router.post('/register', rateLimit({
     }
     if (!safetyConsent) {
       cleanupUploadedFiles(uploadedPhotos);
-      return res.status(400).json({ error: 'You must confirm you are 18+ and agree to respectful conduct' });
+      return res.status(400).json({ error: 'You must confirm you are 20+ and agree to respectful conduct' });
     }
     if (uploadedPhotos.length < MIN_PROFILE_PHOTOS) {
       cleanupUploadedFiles(uploadedPhotos);
@@ -236,9 +236,9 @@ router.post('/register', rateLimit({
     }
 
     const age = ageFromDate(dateOfBirth);
-    if (!age || age < 18) {
+    if (!age || age < 20) {
       cleanupUploadedFiles(uploadedPhotos);
-      return res.status(400).json({ error: 'You must be at least 18 years old to join' });
+      return res.status(400).json({ error: 'You must be at least 20 years old to join' });
     }
 
     const coords = parseCoords(req.body.latitude, req.body.longitude);

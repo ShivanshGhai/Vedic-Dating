@@ -791,7 +791,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
       </div>
       <div class="form-group" style="display:flex;gap:10px;align-items:flex-start;">
         <input type="checkbox" id="reg-safety" style="width:auto;margin-top:4px;" />
-        <label for="reg-safety" style="font-size:12px;letter-spacing:0;text-transform:none;line-height:1.5;">I confirm I am 18+ and will treat other members respectfully. Harassment, impersonation, and unsafe conduct can lead to removal.</label>
+        <label for="reg-safety" style="font-size:12px;letter-spacing:0;text-transform:none;line-height:1.5;">I confirm I am 20+ and will treat other members respectfully. Harassment, impersonation, and unsafe conduct can lead to removal.</label>
       </div>
       <div id="astro-preview" style="display:none;">
         <div class="astro-result">
@@ -972,6 +972,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <div class="compat-actions">
           <button class="btn-primary" id="compat-cert-btn" onclick="downloadCert()">⬇ Download Certificate</button>
           <button class="btn-ghost" id="compat-chat-btn" onclick="openChatFromCompat()">✉ Open Love Letters</button>
+          <button class="btn-danger" id="compat-unmatch-btn" onclick="unmatchSelectedMatch()">Unmatch</button>
         </div>
       </div>
 
@@ -1380,7 +1381,7 @@ async function doRegister() {
     return;
   }
   if (!safetyInput.checked) {
-    err.textContent = 'You must confirm you are 18+ and agree to respectful conduct.';
+    err.textContent = 'You must confirm you are 20+ and agree to respectful conduct.';
     err.classList.add('show');
     safetyInput.focus();
     return;
@@ -1824,6 +1825,26 @@ async function downloadCert() {
 
 function openChatFromCompat() {
   if (selectedMatchId) { activeChatMatchId = selectedMatchId; showSection('chat'); }
+}
+
+async function unmatchSelectedMatch() {
+  if (!selectedMatchId) return toast('No active match to unmatch');
+  const confirmed = window.confirm('Unmatch this profile? This will close the connection and remove your conversation thread.');
+  if (!confirmed) return;
+  try {
+    await api('DELETE', `/api/matches/${selectedMatchId}`);
+    if (activeChatMatchId === selectedMatchId) {
+      activeChatMatchId = null;
+      activeChatMeta = null;
+    }
+    selectedMatchId = null;
+    toast('Profile unmatched');
+    showSection('matches');
+    loadMatches();
+    loadChatList();
+  } catch (e) {
+    toast('Failed to unmatch: ' + e.message);
+  }
 }
 
 // ── PROFILE DETAIL ────────────────────────────────────

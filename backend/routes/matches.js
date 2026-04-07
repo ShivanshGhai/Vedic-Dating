@@ -3,6 +3,7 @@
 const router = require('express').Router();
 const db     = require('../config/db');
 const auth   = require('../middleware/auth');
+const requireVerified = require('../middleware/verified');
 
 router.get('/list', auth, async (req, res) => {
   try {
@@ -38,6 +39,35 @@ router.get('/list', auth, async (req, res) => {
       [req.user.userId, req.user.userId, req.user.userId, req.user.userId, req.user.userId]
     );
     return res.json({ matches: rows });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete('/:matchId', auth, requireVerified, async (req, res) => {
+  try {
+    const matchId = Number.parseInt(req.params.matchId, 10);
+    if (!Number.isInteger(matchId) || matchId <= 0) {
+      return res.status(400).json({ error: 'Invalid match id' });
+    }
+
+    const [[match]] = await db.query(
+      `SELECT MatchID, UserA, UserB
+       FROM INVOLVES
+       WHERE MatchID = ?
+         AND (UserA = ? OR UserB = ?)
+       LIMIT 1`,
+      [matchId, req.user.userId, req.user.userId]
+    );
+    if (!match) return res.status(404).json({ error: 'Match not found' });
+
+    await db.query(
+      'DELETE FROM LIKES WHERE (UserA = ? AND UserB = ?) OR (UserA = ? AND UserB = ?)',
+      [match.UserA, match.UserB, match.UserB, match.UserA]
+    );
+    await db.query('DELETE FROM MATCH_RECORD WHERE MatchID = ?', [matchId]);
+
+    return res.json({ unmatched: true });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }

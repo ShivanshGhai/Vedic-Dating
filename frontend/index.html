@@ -1839,9 +1839,15 @@ async function doRegister() {
     token = data.token || null;
     currentUser = data.user;
     const verificationEmail = currentUser.email;
+    const verificationEmailSent = data.verificationEmailSent !== false;
     setTimeout(() => {
       afterLogin();
-      toast(`Profile created. Verify ${verificationEmail} to unlock likes, chat, and requests.`, 5000);
+      toast(
+        verificationEmailSent
+          ? `Profile created. Verify ${verificationEmail} to unlock likes, chat, and requests.`
+          : `Profile created, but the verification email could not be sent. Use Resend verification after login once mail is fixed.`,
+        6000
+      );
     }, 1200);
   } catch (e) {
     err.textContent = e.message;
@@ -1854,7 +1860,11 @@ async function doRegister() {
 async function resendVerification() {
   if (!currentUser?.email) return;
   try {
-    await api('POST', '/api/auth/resend-verification', { email: currentUser.email });
+    const data = await api('POST', '/api/auth/resend-verification', { email: currentUser.email });
+    if (data?.alreadyVerified) {
+      toast('This email is already verified.');
+      return;
+    }
     toast(`Verification email sent to ${currentUser.email}`);
   } catch (e) {
     toast(e.message);

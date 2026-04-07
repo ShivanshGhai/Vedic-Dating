@@ -307,13 +307,21 @@ router.post('/register', rateLimit({
        WHERE u.UserID = ?`, [result.insertId]
     );
 
+    let verificationEmailSent = true;
+    try {
+      await issueVerificationForUser(user.UserID, user.Email, user.Username);
+    } catch (err) {
+      verificationEmailSent = false;
+      console.warn('verification email failed:', err.message);
+    }
+
     const token = makeToken(user);
     setAuthCookie(res, token);
-    fireAndForget('verification email', () => issueVerificationForUser(user.UserID, user.Email, user.Username));
     return res.status(201).json({
       token,
       user: await withPhotos(user),
       chart: { ...chart, rashiName: user.RashiName, nakshatraName: user.NakshatraName },
+      verificationEmailSent,
     });
   } catch (err) {
     cleanupUploadedFiles(req.files);
@@ -368,14 +376,19 @@ router.post('/resend-verification', rateLimit({
   scope: 'resend-verification',
   message: 'Too many verification email requests. Please try again later.',
 }), async (req, res) => {
-  const email = normalizeEmail(req.body.email);
-  if (!email) return res.status(400).json({ error: 'Email required' });
-  const [[user]] = await db.query('SELECT UserID, Email, Username, EmailVerifiedAt FROM USER WHERE Email = ?', [email]);
-  if (!user) return res.json({ ok: true });
-  if (!user.EmailVerifiedAt) {
-    fireAndForget('resend verification email', () => issueVerificationForUser(user.UserID, user.Email, user.Username));
+  try {
+    const email = normalizeEmail(req.body.email);
+    if (!email) return res.status(400).json({ error: 'Email required' });
+    const [[user]] = await db.query('SELECT UserID, Email, Username, EmailVerifiedAt FROM USER WHERE Email = ?', [email]);
+    if (!user) return res.json({ ok: true });
+    if (!user.EmailVerifiedAt) {
+      await issueVerificationForUser(user.UserID, user.Email, user.Username);
+      return res.json({ ok: true, sent: true });
+    }
+    return res.json({ ok: true, sent: false, alreadyVerified: true });
+  } catch (err) {
+    return res.status(502).json({ error: `Verification email could not be sent: ${err.message}` });
   }
-  return res.json({ ok: true });
 });
 
 router.post('/verify-email', async (req, res) => {

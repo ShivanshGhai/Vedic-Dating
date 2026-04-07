@@ -174,12 +174,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(18,11,13,0.88);backdrop-fi
 .signal-tradition{font-size:12px;color:var(--rose-gold);margin-top:8px;}
 .how-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:1.5rem;}
 
-/* ── AUTH MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(8,6,7,.74);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;}
-.modal-overlay.open{display:flex;}
-.modal{background:linear-gradient(180deg, rgba(34,24,27,.98), rgba(24,17,19,.98));border:.5px solid var(--border-strong);border-radius:18px;padding:2.5rem;width:100%;max-width:440px;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.42);}
-.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink-soft);}
-.modal h2{font-family:var(--font-display);font-size:28px;font-weight:600;margin-bottom:.3rem;}
+/* ── AUTH ── */
+.auth-shell{min-height:100vh;background:linear-gradient(180deg, #171012 0%, #120b0d 100%);}
+.auth-wrap{max-width:1120px;margin:0 auto;padding:3.25rem 2rem 4rem;}
+.auth-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(380px,.7fr);gap:2rem;align-items:start;}
+.auth-panel{position:relative;padding:2.5rem;border:.5px solid var(--border-strong);border-radius:24px;background:linear-gradient(180deg, rgba(34,24,27,.98), rgba(24,17,19,.98));box-shadow:0 32px 80px rgba(0,0,0,.42);}
+.auth-panel h2{font-family:var(--font-display);font-size:34px;font-weight:600;margin-bottom:.3rem;}
+.auth-side{padding:1.5rem 1rem 0 0;}
+.auth-side h1{font-family:var(--font-display);font-size:clamp(44px,6vw,72px);line-height:.94;margin-bottom:1rem;max-width:7ch;}
+.auth-side p{max-width:520px;color:var(--ink-soft);font-size:15px;line-height:1.8;}
+.auth-side-stack{display:grid;gap:12px;margin-top:1.5rem;max-width:520px;}
+.auth-side-card{padding:16px 18px;border:1px solid var(--border);border-radius:18px;background:rgba(34,24,27,.62);}
+.auth-side-card strong{display:block;color:var(--ink);font-size:14px;margin-bottom:4px;}
+.auth-side-card span{display:block;color:var(--ink-soft);font-size:13px;line-height:1.7;}
+.auth-tabs{display:flex;gap:10px;margin:0 0 1.25rem;}
+.auth-tab{flex:1;border:1px solid var(--border-strong);background:rgba(34,24,27,.8);color:var(--ink-mid);border-radius:12px;padding:10px 14px;font:inherit;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+.auth-tab.active{background:rgba(110,15,31,.22);color:var(--ink);border-color:rgba(213,154,133,.24);}
+.auth-back{margin-bottom:1rem;display:inline-flex;align-items:center;gap:8px;color:var(--ink-soft);cursor:pointer;font-size:13px;}
+.auth-back:hover{color:var(--ink);}
 .modal-sub{font-size:13px;color:var(--ink-soft);margin-bottom:1.5rem;}
 .form-group{margin-bottom:1rem;}
 .form-group label{display:block;font-size:12px;font-weight:500;letter-spacing:.05em;color:var(--ink-soft);margin-bottom:.4rem;text-transform:uppercase;}
@@ -206,6 +218,11 @@ background-repeat:no-repeat;padding-right:42px;}
 .astro-result-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:.4rem;}
 .astro-tags-inline{display:flex;gap:6px;flex-wrap:wrap;}
 .astro-tag-sm{background:var(--parchment-mid);color:var(--ink-mid);font-size:12px;padding:3px 10px;border-radius:20px;}
+
+/* ── ADMIN PAGE ── */
+.admin-shell{min-height:100vh;background:linear-gradient(180deg, #171012 0%, #120b0d 100%);}
+.admin-wrap{max-width:1100px;margin:0 auto;padding:3rem 2rem 4rem;}
+.admin-page-card{padding:1.75rem;border:1px solid var(--border);border-radius:24px;background:linear-gradient(180deg, rgba(34,24,27,.96), rgba(24,17,19,.98));box-shadow:var(--shadow);}
 
 /* ── APP SHELL ── */
 .app-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 58px);}
@@ -239,7 +256,6 @@ background-repeat:no-repeat;padding-right:42px;}
 #sec-chat{background:linear-gradient(180deg, rgba(27,20,23,.98), rgba(18,13,15,.98));}
 #sec-requests{background:linear-gradient(180deg, rgba(35,24,28,.98), rgba(22,16,18,.98));}
 #sec-history{background:linear-gradient(180deg, rgba(29,21,24,.98), rgba(19,14,16,.98));}
-#sec-admin{background:linear-gradient(180deg, rgba(40,22,28,.98), rgba(23,16,19,.98));}
 #sec-compat{background:linear-gradient(180deg, rgba(30,21,24,.98), rgba(18,13,15,.98));}
 #sec-profile-detail{background:linear-gradient(180deg, rgba(33,23,26,.98), rgba(21,15,17,.98));}
 #sec-my-profile{background:linear-gradient(180deg, rgba(28,21,24,.98), rgba(18,13,15,.98));}
@@ -443,6 +459,10 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
+  .auth-wrap{padding:2.25rem 1.25rem 3rem;}
+  .auth-layout{grid-template-columns:1fr;}
+  .auth-side{padding:0;}
+  .auth-panel{padding:1.5rem;}
   .hero{grid-template-columns:1fr;padding:3rem 1.25rem 4rem;}
   .hero-text h1{max-width:none;}
   .hero-visual{display:none;}
@@ -467,6 +487,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .mobile-nav{position:fixed;left:0;right:0;bottom:0;z-index:250;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(18,11,13,.95);backdrop-filter:blur(14px);border-top:.5px solid var(--border-strong);}
 }
 @media(max-width:980px){
+  .auth-layout{grid-template-columns:1fr;}
+  .auth-side{padding:0;}
   nav{padding:0 1.25rem;gap:1rem;flex-wrap:wrap;height:auto;min-height:58px;}
   .nav-links{order:3;flex-basis:100%;padding-bottom:.8rem;}
   .nav-right{margin-left:0;width:100%;justify-content:flex-end;padding-bottom:.8rem;}
@@ -648,8 +670,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
           </div>
         </div>
         <div class="video-stage">
-          <strong>Explainer video slot</strong>
-          <div>Keep this space for a future walkthrough, founder message, or short product film.</div>
+          <strong>What to expect</strong>
+          <div>Profiles come first, compatibility adds context, and the deeper reading only shows up once interest is mutual.</div>
         </div>
       </div>
     </div>
@@ -729,14 +751,47 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
 </div>
 
 <!-- ══════════════════════════════════════════════ -->
-<!-- AUTH MODAL -->
+<!-- AUTH PAGE -->
 <!-- ══════════════════════════════════════════════ -->
-<div class="modal-overlay" id="auth-modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeAuth()">✕</button>
+<div class="page" id="page-auth">
+  <div class="auth-shell">
+    <nav>
+      <div class="nav-logo" onclick="goTo(lastPublicPage || 'landing')"><span class="nav-logo-word">Ashta<span>koota</span></span></div>
+      <div class="nav-links">
+        <button class="nav-link" onclick="goTo('landing')">Back to landing</button>
+        <button class="nav-link" onclick="goTo('how')">How it works</button>
+      </div>
+    </nav>
+    <div class="auth-wrap">
+      <div class="auth-layout">
+        <div class="auth-side">
+          <div class="section-label">Get started</div>
+          <h1>Build something more intentional than another swipe.</h1>
+          <p>Keep the path focused. Sign in if you already have an account, or create a profile that carries intent, context, and enough substance to be taken seriously.</p>
+          <div class="auth-side-stack">
+            <div class="auth-side-card">
+              <strong>One clear next step</strong>
+              <span>No dashboard noise here. Just authentication and profile creation.</span>
+            </div>
+            <div class="auth-side-card">
+              <strong>Email unlocks access</strong>
+              <span>Verify your inbox after signup to unlock likes, requests, Love Letters, and reporting.</span>
+            </div>
+            <div class="auth-side-card">
+              <strong>Profiles before performance</strong>
+              <span>Intent, photos, and compatibility context lead before the conversation starts.</span>
+            </div>
+          </div>
+        </div>
+        <div class="auth-panel">
+          <div class="auth-back" onclick="goTo(lastPublicPage || 'landing')">← Back</div>
+          <div class="auth-tabs">
+            <button class="auth-tab active" id="auth-tab-login" onclick="switchAuth('login')">Sign in</button>
+            <button class="auth-tab" id="auth-tab-register" onclick="switchAuth('register')">Create account</button>
+          </div>
 
-    <!-- LOGIN -->
-    <div id="auth-login">
+          <!-- LOGIN -->
+          <div id="auth-login">
       <h2>Back for something real?</h2>
       <p class="modal-sub">Sign in and pick up where the games stop and the clarity starts.</p>
       <div class="form-error" id="login-error"></div>
@@ -747,8 +802,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
       <p class="form-switch">New here? <a onclick="switchAuth('register')">Create account</a></p>
     </div>
 
-    <!-- REGISTER -->
-    <div id="auth-register" style="display:none;">
+          <!-- REGISTER -->
+          <div id="auth-register" style="display:none;">
       <h2>Build a profile worth reading</h2>
       <p class="modal-sub">This is where you trade swipe-bait for substance. We use your birth details for compatibility, but your intent and character still lead.</p>
       <div class="form-error" id="register-error"></div>
@@ -821,6 +876,9 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
       </div>
       <button class="form-btn" id="register-btn" onclick="doRegister()">Start my profile &amp; see my chart</button>
       <p class="form-switch">Already have an account? <a onclick="switchAuth('login')">Sign in</a></p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -837,6 +895,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <button class="btn-ghost" onclick="toggleNotifPanel()">🔔</button>
         <div class="notif-badge" id="notif-badge"></div>
       </div>
+      <button class="btn-ghost" id="admin-app-link" style="display:none;" onclick="goToAdmin()">Moderation</button>
       <button class="btn-ghost" onclick="showSection('my-profile')">Profile</button>
       <button class="btn-ghost" onclick="doLogout()">Sign out</button>
     </div>
@@ -853,7 +912,6 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <div class="sidebar-divider"></div>
         <button class="sidebar-item" data-section="requests" onclick="showSection('requests')"><span class="sidebar-icon">✧</span> Requests</button>
         <button class="sidebar-item" data-section="history" onclick="showSection('history')"><span class="sidebar-icon">◷</span> Your Receipts</button>
-        <button class="sidebar-item" data-section="admin" id="admin-sidebar-link" style="display:none;" onclick="showSection('admin')"><span class="sidebar-icon">⚑</span> Moderation</button>
         <div class="sidebar-divider"></div>
         <button class="sidebar-item" data-section="my-profile" onclick="showSection('my-profile')"><span class="sidebar-icon">◉</span> My Profile</button>
       </div>
@@ -958,19 +1016,6 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <div class="history-list" id="history-list"><div class="empty"><div class="spinner"></div></div></div>
       </div>
 
-      <div class="section" id="sec-admin">
-        <div class="section-header"><h2>Moderation</h2><p>Review community reports and resolve them quickly</p></div>
-        <div class="filter-bar">
-          <select class="filter-select" id="admin-status-filter" onchange="loadAdminReports()">
-            <option value="open">Open</option>
-            <option value="reviewed">Reviewed</option>
-            <option value="resolved">Resolved</option>
-            <option value="all">All</option>
-          </select>
-        </div>
-        <div id="admin-reports-list"><div class="empty"><div class="empty-text">Admin access required</div></div></div>
-      </div>
-
       <!-- COMPAT DETAIL -->
       <div class="section" id="sec-compat">
         <button class="btn-ghost" style="margin-bottom:1.25rem;" onclick="goBack()">← Back</button>
@@ -1031,6 +1076,34 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   </div>
 </div><!-- /page-app -->
 
+<div class="page" id="page-admin">
+  <div class="admin-shell">
+    <nav>
+      <div class="nav-logo" onclick="goTo('app')"><span class="nav-logo-word">Ashta<span>koota</span></span></div>
+      <div class="nav-links">
+        <button class="nav-link" onclick="goTo('app')">Back to app</button>
+      </div>
+      <div class="nav-right">
+        <button class="btn-ghost" onclick="doLogout()">Sign out</button>
+      </div>
+    </nav>
+    <div class="admin-wrap">
+      <div class="admin-page-card">
+        <div class="section-header"><h2>Moderation</h2><p>Review community reports in a separate staff-only workspace.</p></div>
+        <div class="filter-bar">
+          <select class="filter-select" id="admin-status-filter" onchange="loadAdminReports()">
+            <option value="open">Open</option>
+            <option value="reviewed">Reviewed</option>
+            <option value="resolved">Resolved</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+        <div id="admin-reports-list"><div class="empty"><div class="empty-text">Admin access required</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="/config.js"></script>
 <script>
 // ══════════════════════════════════════════════════════
@@ -1046,6 +1119,7 @@ let token = null;
 let currentUser = null;
 let currentSection = 'dashboard';
 let previousSection = null;
+let lastPublicPage = 'landing';
 let selectedEvalId = null;
 let selectedUserId = null;
 let selectedMatchId = null;
@@ -1105,10 +1179,8 @@ function updateVerificationBanner() {
 
 function updateAdminVisibility() {
   const visible = !!currentUser?.isAdmin;
-  const nav = document.getElementById('admin-nav-link');
-  const side = document.getElementById('admin-sidebar-link');
-  if (nav) nav.style.display = visible ? '' : 'none';
-  if (side) side.style.display = visible ? '' : 'none';
+  const button = document.getElementById('admin-app-link');
+  if (button) button.style.display = visible ? '' : 'none';
 }
 
 function alignsWithDatingIntent(user) {
@@ -1247,6 +1319,7 @@ function toast(msg, duration = 3000) {
 function goTo(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + pageId).classList.add('active');
+  if (pageId === 'landing' || pageId === 'how') lastPublicPage = pageId;
   window.scrollTo(0, 0);
 }
 
@@ -1265,7 +1338,6 @@ function showSection(id) {
     chat: 'Love Letters',
     requests: 'Requests',
     history: 'Your Receipts',
-    admin: 'Moderation',
     'my-profile': 'Profile',
     compat: 'Compatibility',
     'profile-detail': 'Profile',
@@ -1279,7 +1351,6 @@ function showSection(id) {
   if (id === 'chat') loadChatList();
   if (id === 'requests') loadRequests();
   if (id === 'history') loadHistory();
-  if (id === 'admin') loadAdminReports();
   if (id === 'my-profile') renderMyProfile();
 }
 
@@ -1287,15 +1358,23 @@ function goBack() {
   showSection(previousSection || 'dashboard');
 }
 
-// ── Auth modal ────────────────────────────────────────
+// ── Auth page ─────────────────────────────────────────
 function openAuth(tab) {
-  document.getElementById('auth-modal').classList.add('open');
+  goTo('auth');
   switchAuth(tab);
 }
-function closeAuth() { document.getElementById('auth-modal').classList.remove('open'); }
+function closeAuth() { goTo(lastPublicPage || 'landing'); }
 function switchAuth(tab) {
   document.getElementById('auth-login').style.display   = tab === 'login'    ? '' : 'none';
   document.getElementById('auth-register').style.display = tab === 'register' ? '' : 'none';
+  document.getElementById('auth-tab-login')?.classList.toggle('active', tab === 'login');
+  document.getElementById('auth-tab-register')?.classList.toggle('active', tab === 'register');
+}
+
+function goToAdmin() {
+  if (!currentUser?.isAdmin) return toast('Admin access required');
+  goTo('admin');
+  loadAdminReports();
 }
 
 // ── City autocomplete (OpenStreetMap Nominatim — no API key needed) ──────
@@ -1458,7 +1537,6 @@ async function doRegister() {
     currentUser = data.user;
     const verificationEmail = currentUser.email;
     setTimeout(() => {
-      closeAuth();
       afterLogin();
       toast(`Profile created. Verify ${verificationEmail} to unlock likes, chat, and requests.`, 5000);
     }, 1200);
@@ -1552,7 +1630,6 @@ async function doLogin() {
     if (!data) return;
     token = data.token || null;
     currentUser = data.user;
-    closeAuth();
     afterLogin();
   } catch (e) {
     err.textContent = e.message;

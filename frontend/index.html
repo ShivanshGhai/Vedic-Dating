@@ -45,7 +45,7 @@ body{font-family:var(--font-body);background:
   radial-gradient(circle at 12% 0%, rgba(110,15,31,.28), transparent 26%),
   radial-gradient(circle at 84% 8%, rgba(213,154,133,.05), transparent 16%),
   linear-gradient(180deg, #120b0d 0%, #171012 48%, #0f090b 100%);
-  color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;position:relative;}
+  color:var(--ink);min-height:100vh;font-size:15px;line-height:1.6;position:relative;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.18;background:
   radial-gradient(circle at 12% 18%, rgba(213,154,133,.06), transparent 18%),
   radial-gradient(circle at 88% 82%, rgba(110,15,31,.1), transparent 20%);}
@@ -212,6 +212,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(18,11,13,0.88);backdrop-fi
 .auth-mode-kicker::before{content:'';width:18px;height:1px;background:rgba(213,154,133,.42);}
 .auth-shell[data-auth-mode="login"] .auth-panel{max-width:520px;}
 .auth-shell[data-auth-mode="login"] .auth-layout{grid-template-columns:minmax(0,.95fr) minmax(420px,.65fr);}
+.auth-shell[data-auth-mode="login"] .auth-wrap{display:flex;align-items:center;min-height:calc(100vh - 58px);}
 .auth-shell[data-auth-mode="signup"] .auth-layout{grid-template-columns:minmax(0,.88fr) minmax(430px,.72fr);}
 .modal-sub{font-size:13px;color:var(--ink-soft);margin-bottom:1.5rem;}
 .form-group{margin-bottom:1rem;}
@@ -235,6 +236,16 @@ background-repeat:no-repeat;padding-right:42px;}
 .form-switch a{color:var(--gold-dim);cursor:pointer;text-decoration:underline;}
 .form-error{background:rgba(110,15,31,.12);border:.5px solid rgba(213,154,133,.22);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--rose-gold-soft);margin-bottom:1rem;display:none;}
 .form-error.show{display:block;}
+.form-section{padding-top:1.1rem;margin-top:1.1rem;border-top:1px solid rgba(213,154,133,.12);}
+.form-section:first-of-type{padding-top:0;margin-top:0;border-top:none;}
+.form-section-title{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.85rem;}
+.form-section-title::before{content:'';width:18px;height:1px;background:rgba(213,154,133,.38);}
+.field-status{display:none;margin-top:.35rem;font-size:11px;color:var(--rose-gold-soft);}
+.field-status.show{display:block;}
+.file-input-wrap{position:relative;padding:14px 16px;border:1px dashed rgba(213,154,133,.28);border-radius:14px;background:rgba(18,11,13,.72);}
+.file-input-wrap input[type="file"]{width:100%;}
+.consent-block{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:14px;border:1px solid rgba(213,154,133,.16);background:rgba(34,24,27,.76);}
+.consent-block input[type="checkbox"]{accent-color:var(--velvet-red);}
 .astro-result{background:var(--parchment-dark);border:.5px solid var(--border);border-radius:10px;padding:14px;margin-top:.75rem;font-size:13px;}
 .astro-result-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-dim);margin-bottom:.4rem;}
 .astro-tags-inline{display:flex;gap:6px;flex-wrap:wrap;}
@@ -264,6 +275,11 @@ background-repeat:no-repeat;padding-right:42px;}
 .mobile-nav-item{border:none;background:none;color:var(--ink-soft);font-size:11px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;cursor:pointer;}
 .mobile-nav-item.active{color:var(--rose-gold-soft);}
 .mobile-nav-icon{font-size:16px;line-height:1;}
+.section-shortcuts{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:1.35rem;}
+.section-shortcut{padding:10px 14px;border-radius:14px;border:1px solid rgba(213,154,133,.18);background:rgba(49,33,37,.66);color:var(--ink-mid);font-size:13px;cursor:pointer;transition:all var(--ease-premium);}
+.section-shortcut:hover{background:rgba(110,15,31,.16);border-color:var(--border-strong);color:var(--ink);}
+.danger-card{border-color:rgba(142,27,52,.28);background:linear-gradient(180deg, rgba(34,24,27,.98), rgba(28,17,21,.98));}
+.danger-card .card-title{color:var(--rose-gold-soft);}
 
 /* ── SECTIONS ── */
 .section{display:none;padding:2.35rem;border:1px solid var(--border);border-radius:26px;background:linear-gradient(180deg, rgba(34,24,27,.96), rgba(24,17,19,.98));box-shadow:var(--shadow-soft);}
@@ -285,6 +301,7 @@ background-repeat:no-repeat;padding-right:42px;}
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem;}
 .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow-card);transition:transform var(--ease-premium),box-shadow var(--ease-premium),border-color var(--ease-premium);}
 .stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover);border-color:var(--border-strong);}
+.stat-card.primary{background:linear-gradient(180deg, rgba(55,28,34,.98), rgba(34,24,27,.98));border-color:rgba(213,154,133,.22);}
 .stat-num{font-family:var(--font-display);font-size:36px;font-weight:600;color:var(--gold);}
 .stat-label{font-size:13px;color:var(--ink-soft);margin-top:2px;}
 .dash-row{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;}
@@ -303,12 +320,13 @@ background-repeat:no-repeat;padding-right:42px;}
 .profiles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;}
 .profile-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.45rem;display:flex;gap:14px;transition:transform var(--ease-premium),box-shadow var(--ease-premium),border-color var(--ease-premium);}
 .profile-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:var(--border-strong);}
-.profile-avatar{width:52px;height:52px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;font-weight:600;color:#FAF5EC;flex-shrink:0;cursor:pointer;overflow:hidden;}
+.profile-avatar{width:58px;height:58px;border-radius:18px;background:linear-gradient(180deg, rgba(213,154,133,.96), rgba(185,122,102,.96));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:22px;font-weight:600;color:#FAF5EC;flex-shrink:0;cursor:pointer;overflow:hidden;box-shadow:0 12px 24px rgba(0,0,0,.16);}
 .profile-avatar img{width:100%;height:100%;object-fit:cover;}
 .profile-info{flex:1;min-width:0;}
-.profile-name{font-size:15px;font-weight:500;cursor:pointer;}
+.profile-name{font-size:17px;font-weight:600;cursor:pointer;line-height:1.1;}
 .profile-name:hover{color:var(--gold-dim);}
-.profile-astro{font-size:12px;color:var(--ink-soft);margin-top:2px;}
+.profile-astro{font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.55;}
+.profile-signal{font-size:13px;color:var(--ink-mid);margin-top:6px;line-height:1.6;}
 .profile-score-row{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
 .profile-reasons{display:flex;flex-direction:column;gap:6px;margin-top:10px;}
 .profile-reason{font-size:11px;line-height:1.5;color:var(--ink-soft);padding:7px 9px;border-radius:10px;background:rgba(110,15,31,.1);border:.5px solid var(--border);}
@@ -404,6 +422,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
 .chat-send{padding:10px 20px;background:linear-gradient(180deg, var(--velvet-red) 0%, #5f0d1a 100%);color:var(--champagne);border:none;border-radius:12px;cursor:pointer;font-weight:500;transition:background var(--ease-premium),transform var(--ease-premium),box-shadow var(--ease-premium);}
 .chat-send:hover{background:linear-gradient(180deg, var(--deep-garnet) 0%, #76162b 100%);transform:translateY(-2px) scale(1.02);box-shadow:0 14px 28px rgba(110,15,31,.24);}
 .chat-empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:14px;}
+.request-columns{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.request-section{background:rgba(34,24,27,.62);border:1px solid rgba(213,154,133,.14);border-radius:18px;padding:1.25rem;}
 
 /* ── REQUESTS ── */
 .request-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.45rem;display:flex;align-items:center;gap:14px;margin-bottom:12px;box-shadow:var(--shadow-card);transition:transform var(--ease-premium),box-shadow var(--ease-premium),border-color var(--ease-premium);}
@@ -478,10 +498,13 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
 .loading-overlay.show{display:flex;}
 
 /* ── EMPTY STATES ── */
-.empty{text-align:center;padding:3rem;color:var(--ink-soft);}
+.empty{display:flex;justify-content:center;padding:1.25rem;color:var(--ink-soft);}
 .empty::before{display:none;}
-.empty-icon{font-size:36px;margin-bottom:.75rem;}
-.empty-text{font-size:14px;}
+.empty-state{max-width:360px;padding:1.8rem 1.35rem;border:1px solid rgba(213,154,133,.14);border-radius:18px;background:rgba(34,24,27,.72);text-align:center;box-shadow:var(--shadow-card);}
+.empty-icon{font-size:30px;margin-bottom:.75rem;color:var(--rose-gold-soft);}
+.empty-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.35rem;}
+.empty-text{font-size:14px;line-height:1.7;}
+.empty-action{margin-top:1rem;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
@@ -503,16 +526,25 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .signal-grid{grid-template-columns:1fr;}
   .difference-row{grid-template-columns:1fr;}
   .cta-inner{flex-direction:column;align-items:flex-start;}
-  .dash-grid{grid-template-columns:repeat(2,1fr);}
+  .dash-grid{grid-template-columns:1fr;}
   .dash-row{grid-template-columns:1fr;}
-  .chat-layout{grid-template-columns:1fr;}
+  .chat-layout{grid-template-columns:1fr;height:auto;min-height:420px;}
   .chat-list{display:none;}
   .main-content{padding:1rem 1rem 6rem;}
   .section{padding:1.35rem;border-radius:20px;}
+  .filter-bar{display:grid;grid-template-columns:1fr;gap:12px;}
+  .profiles-grid{grid-template-columns:1fr;}
+  .profile-card{padding:1.2rem;gap:12px;}
+  .profile-actions{flex-direction:column;}
+  .request-columns{grid-template-columns:1fr;}
+  .notif-panel{position:fixed;left:0;right:0;top:58px;width:auto;max-height:min(60vh,520px);border-radius:0 0 18px 18px;}
+  .public-footer-inner{flex-direction:column;align-items:flex-start;}
+  .auth-shell[data-auth-mode="login"] .auth-wrap{min-height:auto;display:block;}
   .detail-header{padding:1.3rem;gap:14px;}
   .detail-gallery-strip{gap:8px;}
   .detail-gallery-photo{width:58px;height:74px;border-radius:14px;}
   .mobile-nav{position:fixed;left:0;right:0;bottom:0;z-index:250;display:grid;grid-template-columns:repeat(5,1fr);background:rgba(18,11,13,.95);backdrop-filter:blur(14px);border-top:.5px solid var(--border-strong);}
+  .nav-utility-profile{display:none;}
 }
 @media(max-width:980px){
   .auth-layout{grid-template-columns:1fr;}
@@ -532,6 +564,13 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .difference-inner{grid-template-columns:1fr;}
   .signal-grid{grid-template-columns:1fr;}
   .detail-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .nav-right{gap:6px;}
+  .nav-context{order:2;flex-basis:100%;}
+  .profile-astro{font-size:11px;}
+  .profile-score-row{align-items:flex-start;gap:10px;flex-direction:column;}
+  .mobile-nav-item{padding:9px 4px;font-size:10px;}
 }
 </style>
 </head>
@@ -958,66 +997,85 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
       <h2>Build a profile worth reading</h2>
       <p class="modal-sub">This is where you trade swipe-bait for substance. We use your birth details for compatibility, but your intent and character still lead.</p>
       <div class="form-error" id="register-error"></div>
-      <div class="form-row">
-        <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="arjun_v" /></div>
-        <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="you@example.com" /></div>
+      <div class="form-section">
+        <div class="form-section-title">Account details</div>
+        <div class="form-row">
+          <div class="form-group"><label>Username</label><input type="text" id="reg-username" placeholder="arjun_v" /></div>
+          <div class="form-group"><label>Email</label><input type="email" id="reg-email" placeholder="you@example.com" /></div>
+        </div>
+        <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="Min 8 characters" /></div>
       </div>
-      <div class="form-group"><label>Password</label><input type="password" id="reg-password" placeholder="Min 8 characters" /></div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>I am</label>
-          <select id="reg-gender">
-            <option value="">Select</option>
-            <option value="man">Man</option>
-            <option value="woman">Woman</option>
-            <option value="non-binary">Non-binary</option>
-            <option value="prefer-not-to-say">Prefer not to say</option>
-          </select>
+      <div class="form-section">
+        <div class="form-section-title">Relationship intent</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>I am</label>
+            <select id="reg-gender">
+              <option value="">Select</option>
+              <option value="man">Man</option>
+              <option value="woman">Woman</option>
+              <option value="non-binary">Non-binary</option>
+              <option value="prefer-not-to-say">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Looking for</label>
+            <select id="reg-looking-for">
+              <option value="">Select</option>
+              <option value="woman">Women</option>
+              <option value="man">Men</option>
+              <option value="everyone">Everyone</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
-          <label>Looking for</label>
-          <select id="reg-looking-for">
-            <option value="">Select</option>
-            <option value="woman">Women</option>
-            <option value="man">Men</option>
-            <option value="everyone">Everyone</option>
+          <label>Relationship intent</label>
+          <select id="reg-intent">
+            <option value="">Select your intent</option>
+            <option value="marriage">Marriage-minded</option>
+            <option value="long-term">Long-term relationship</option>
+            <option value="serious-dating">Serious dating</option>
+            <option value="exploring">Exploring slowly</option>
           </select>
         </div>
       </div>
-      <div class="form-group">
-        <label>Relationship intent</label>
-        <select id="reg-intent">
-          <option value="">Select your intent</option>
-          <option value="marriage">Marriage-minded</option>
-          <option value="long-term">Long-term relationship</option>
-          <option value="serious-dating">Serious dating</option>
-          <option value="exploring">Exploring slowly</option>
-        </select>
+      <div class="form-section">
+        <div class="form-section-title">Birth details</div>
+        <div class="form-row">
+          <div class="form-group"><label>Date of Birth</label><input type="date" id="reg-dob" /></div>
+          <div class="form-group"><label>Time of Birth</label><input type="time" id="reg-tob" /></div>
+        </div>
+        <div class="form-group" style="position:relative;">
+          <label>Birth City</label>
+          <input type="text" id="reg-location" placeholder="Start typing a city… e.g. Mumbai" autocomplete="off" oninput="citySearch(this.value)" />
+          <div id="city-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:.5px solid var(--border-strong);border-radius:0 0 8px 8px;z-index:50;max-height:200px;overflow-y:auto;box-shadow:var(--shadow);"></div>
+          <input type="hidden" id="reg-lat" value="" />
+          <input type="hidden" id="reg-lng" value="" />
+          <div id="city-confirm" style="display:none;margin-top:6px;font-size:12px;color:var(--accent-teal);">✓ <span id="city-confirm-text"></span></div>
+          <p class="form-hint">Select your birth city from the dropdown so coordinates can be added automatically.</p>
+        </div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Date of Birth</label><input type="date" id="reg-dob" /></div>
-        <div class="form-group"><label>Time of Birth</label><input type="time" id="reg-tob" /></div>
+      <div class="form-section">
+        <div class="form-section-title">Profile identity</div>
+        <div class="form-group"><label>Profile headline</label><input type="text" id="reg-prompt" maxlength="160" placeholder="A grounded romantic who values warmth, family, and emotional maturity." /></div>
+        <div class="form-group"><label>Bio</label><textarea id="reg-bio" rows="2" placeholder="What makes you a good partner? What kind of connection are you hoping to build?" style="resize:vertical;"></textarea></div>
       </div>
-      <div class="form-group" style="position:relative;">
-        <label>Birth City</label>
-        <input type="text" id="reg-location" placeholder="Start typing a city… e.g. Mumbai" autocomplete="off" oninput="citySearch(this.value)" />
-        <div id="city-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:.5px solid var(--border-strong);border-radius:0 0 8px 8px;z-index:50;max-height:200px;overflow-y:auto;box-shadow:var(--shadow);"></div>
-        <!-- Hidden fields auto-filled by city selection -->
-        <input type="hidden" id="reg-lat" value="" />
-        <input type="hidden" id="reg-lng" value="" />
-        <div id="city-confirm" style="display:none;margin-top:6px;font-size:12px;color:var(--accent-teal);">✓ <span id="city-confirm-text"></span></div>
-        <p class="form-hint">Select your birth city from the dropdown — coordinates fill automatically.</p>
+      <div class="form-section">
+        <div class="form-section-title">Photos</div>
+        <div class="form-group">
+          <label>Profile Photos</label>
+          <div class="file-input-wrap">
+            <input type="file" id="reg-photos" accept="image/*" multiple />
+            <p class="form-hint">Add at least 4 photos. Your first photo becomes your main profile image.</p>
+          </div>
+        </div>
       </div>
-      <div class="form-group"><label>Profile headline</label><input type="text" id="reg-prompt" maxlength="160" placeholder="A grounded romantic who values warmth, family, and emotional maturity." /></div>
-      <div class="form-group"><label>Bio</label><textarea id="reg-bio" rows="2" placeholder="What makes you a good partner? What kind of connection are you hoping to build?" style="resize:vertical;"></textarea></div>
-      <div class="form-group">
-        <label>Profile Photos</label>
-        <input type="file" id="reg-photos" accept="image/*" multiple />
-        <p class="form-hint">Add at least 4 photos. Your first photo becomes your main profile image.</p>
-      </div>
-      <div class="form-group" style="display:flex;gap:10px;align-items:flex-start;">
-        <input type="checkbox" id="reg-safety" style="width:auto;margin-top:4px;" />
-        <label for="reg-safety" style="font-size:12px;letter-spacing:0;text-transform:none;line-height:1.5;">I confirm I am 20+ and will treat other members respectfully. Harassment, impersonation, and unsafe conduct can lead to removal.</label>
+      <div class="form-section">
+        <div class="form-section-title">Consent and submission</div>
+        <div class="consent-block">
+          <input type="checkbox" id="reg-safety" style="width:auto;margin-top:4px;" />
+          <label for="reg-safety" style="font-size:12px;letter-spacing:0;text-transform:none;line-height:1.5;">I confirm I am 20+ and will treat other members respectfully. Harassment, impersonation, and unsafe conduct can lead to removal.</label>
+        </div>
       </div>
       <div id="astro-preview" style="display:none;">
         <div class="astro-result">
@@ -1047,7 +1105,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <div class="notif-badge" id="notif-badge"></div>
       </div>
       <button class="btn-ghost" id="admin-app-link" style="display:none;" onclick="goToAdmin()">Moderation</button>
-      <button class="btn-ghost" onclick="showSection('my-profile')">Profile</button>
+      <button class="btn-ghost nav-utility-profile" onclick="showSection('my-profile')">Profile</button>
       <button class="btn-ghost" onclick="doLogout()">Sign out</button>
     </div>
   </nav>
@@ -1080,10 +1138,14 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
           </div>
         </div>
         <div class="section-header"><h2>Your Clarity Board</h2><p>The signal that matters right now, without the swipe-noise.</p></div>
-        <div class="dash-grid">
-          <div class="stat-card"><div class="stat-num" id="stat-matches">—</div><div class="stat-label">Mutual matches</div></div>
+      <div class="dash-grid">
+          <div class="stat-card primary"><div class="stat-num" id="stat-matches">—</div><div class="stat-label">Mutual matches</div></div>
           <div class="stat-card"><div class="stat-num" id="stat-readings">—</div><div class="stat-label">Readings done</div></div>
           <div class="stat-card"><div class="stat-num" id="stat-best">—</div><div class="stat-label">Best score /36</div></div>
+        </div>
+        <div class="section-shortcuts">
+          <button class="section-shortcut" onclick="showSection('requests')">Open Requests</button>
+          <button class="section-shortcut" onclick="showSection('history')">Open Receipts</button>
         </div>
         <div class="dash-row">
           <div class="card">
@@ -1151,13 +1213,15 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
       <!-- REQUESTS -->
       <div class="section" id="sec-requests">
         <div class="section-header"><h2>Who Wants More Context?</h2><p>Reading requests from people who want more than flirt-now, figure-it-out-later.</p></div>
-        <div style="margin-bottom:1.5rem;">
-          <div class="card-title" style="margin-bottom:.75rem;">Incoming signals (expires in 48h)</div>
-          <div id="incoming-requests"><div class="empty"><div class="spinner"></div></div></div>
-        </div>
-        <div>
-          <div class="card-title" style="margin-bottom:.75rem;">Signals you sent</div>
-          <div id="sent-requests"><div class="empty"><div class="spinner"></div></div></div>
+        <div class="request-columns">
+          <div class="request-section">
+            <div class="card-title" style="margin-bottom:.75rem;">Incoming signals (expires in 48h)</div>
+            <div id="incoming-requests"><div class="empty"><div class="spinner"></div></div></div>
+          </div>
+          <div class="request-section">
+            <div class="card-title" style="margin-bottom:.75rem;">Signals you sent</div>
+            <div id="sent-requests"><div class="empty"><div class="spinner"></div></div></div>
+          </div>
         </div>
       </div>
 
@@ -1219,9 +1283,9 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
     </div><!-- /main-content -->
   </div><!-- /app-layout -->
   <div class="mobile-nav">
-    <button class="mobile-nav-item active" data-section="dashboard" onclick="showSection('dashboard')"><span class="mobile-nav-icon">✦</span><span>Home</span></button>
+    <button class="mobile-nav-item active" data-section="dashboard" onclick="showSection('dashboard')"><span class="mobile-nav-icon">✦</span><span>Overview</span></button>
     <button class="mobile-nav-item" data-section="browse" onclick="showSection('browse')"><span class="mobile-nav-icon">◎</span><span>Discover</span></button>
-    <button class="mobile-nav-item" data-section="matches" onclick="showSection('matches')"><span class="mobile-nav-icon">♥</span><span>Matches</span></button>
+    <button class="mobile-nav-item" data-section="matches" onclick="showSection('matches')"><span class="mobile-nav-icon">♥</span><span>Worth It</span></button>
     <button class="mobile-nav-item" data-section="chat" onclick="showSection('chat')"><span class="mobile-nav-icon">✉</span><span>Love Letters</span></button>
     <button class="mobile-nav-item" data-section="my-profile" onclick="showSection('my-profile')"><span class="mobile-nav-icon">◉</span><span>Profile</span></button>
   </div>
@@ -1951,6 +2015,28 @@ function avatarEl(user, size = 44) {
   return escapeHtml(user.username[0].toUpperCase());
 }
 
+function renderEmptyState({ icon = '✦', title, text, ctaLabel = '', ctaAction = '' }) {
+  return `
+    <div class="empty">
+      <div class="empty-state">
+        <div class="empty-icon">${escapeHtml(icon)}</div>
+        <div class="empty-title">${escapeHtml(title)}</div>
+        <div class="empty-text">${escapeHtml(text)}</div>
+        ${ctaLabel && ctaAction ? `<button class="btn-ghost empty-action" onclick="${ctaAction}">${escapeHtml(ctaLabel)}</button>` : ''}
+      </div>
+    </div>`;
+}
+
+function resetBrowseFilters() {
+  const ids = ['browse-search', 'browse-intent', 'browse-rashi', 'browse-gana', 'browse-minscore'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = '';
+  });
+  loadBrowse();
+}
+
 // ── DASHBOARD ─────────────────────────────────────────
 async function loadDashboard() {
   try {
@@ -1979,7 +2065,13 @@ async function loadDashboard() {
       .slice(0, 4);
     grid.innerHTML = suggestedUsers.length
       ? suggestedUsers.map(profileCard).join('')
-      : '<div class="empty"><div class="empty-icon">✦</div><div class="empty-text">No 25+ compatibility profiles available yet. As more people join, this list will fill with stronger matches.</div></div>';
+      : renderEmptyState({
+          icon: '✦',
+          title: 'Nothing worth revisiting yet',
+          text: 'As stronger profiles join, the people most aligned with your intent will show up here first.',
+          ctaLabel: 'Browse profiles',
+          ctaAction: "showSection('browse')",
+        });
 
     // Best matches
     const bml = document.getElementById('best-matches-list');
@@ -1994,7 +2086,13 @@ async function loadDashboard() {
           </div>
           <div class="bm-score">${escapeHtml(m.totalScore)}</div>
         </div>`).join('')
-      : '<div class="empty" style="padding:1.5rem;"><div class="empty-text">No strong 25+ matches yet.</div></div>';
+      : renderEmptyState({
+          icon: '♥',
+          title: 'No standout matches yet',
+          text: 'Once a connection crosses the stronger score range, it will surface here as your clearest signal.',
+          ctaLabel: 'Browse profiles',
+          ctaAction: "showSection('browse')",
+        });
   } catch (e) { console.error(e); }
 }
 
@@ -2023,9 +2121,21 @@ async function loadBrowse() {
     const users = (data?.users || []).sort((a, b) => alignsWithDatingIntent(b) - alignsWithDatingIntent(a));
     grid.innerHTML = users.length
       ? users.map(profileCard).join('')
-      : '<div class="empty"><div class="empty-icon">◎</div><div class="empty-text">No profiles currently meet your compatibility threshold and filters.</div></div>';
+      : renderEmptyState({
+          icon: '◎',
+          title: 'No profiles match these filters',
+          text: 'Widen the search slightly and stronger context will come back into view.',
+          ctaLabel: 'Reset filters',
+          ctaAction: 'resetBrowseFilters()',
+        });
   } catch (e) {
-    grid.innerHTML = '<div class="empty">Failed to load profiles</div>';
+    grid.innerHTML = renderEmptyState({
+      icon: '◎',
+      title: 'Profiles unavailable',
+      text: 'The browse feed could not be loaded right now. Try again in a moment.',
+      ctaLabel: 'Retry',
+      ctaAction: 'loadBrowse()',
+    });
   }
 }
 
@@ -2047,7 +2157,7 @@ function profileCard(u) {
       <div class="profile-avatar" onclick="openProfile(${u.id})">${avatarContent}</div>
       <div class="profile-info">
         <div class="profile-name" onclick="openProfile(${u.id})">${escapeHtml(u.username)}</div>
-        ${u.profilePrompt ? `<div class="profile-astro" style="margin-top:4px;color:var(--ink-mid);">${escapeHtml(u.profilePrompt)}</div>` : ''}
+        ${u.profilePrompt ? `<div class="profile-signal">${escapeHtml(u.profilePrompt)}</div>` : ''}
         <div class="profile-astro">${escapeHtml(displayAge(u))} · ${escapeHtml(displayLocation(u))}</div>
         <div class="profile-astro" style="margin-top:2px;">${escapeHtml(titleizeEnum(u.relationshipIntent))} · Looking for ${escapeHtml(titleizeEnum(u.lookingFor))}</div>
         <div class="profile-astro" style="margin-top:2px;">${escapeHtml(u.rashi)} · ${escapeHtml(u.nakshatra)}</div>
@@ -2074,7 +2184,13 @@ async function loadMatches() {
     const data = await api('GET', '/api/matches/list');
     const matches = data?.matches || [];
     if (!matches.length) {
-      list.innerHTML = '<div class="empty"><div class="empty-icon">♥</div><div class="empty-text">No matches yet — go like some profiles!</div></div>';
+      list.innerHTML = renderEmptyState({
+        icon: '♥',
+        title: 'Nothing worth revisiting yet',
+        text: 'When attraction and intent line up on both sides, your mutual matches will live here.',
+        ctaLabel: 'Browse profiles',
+        ctaAction: "showSection('browse')",
+      });
       return;
     }
     const label = s => s >= 33 ? 'Excellent' : s >= 25 ? 'Good' : s >= 18 ? 'Average' : 'Poor';
@@ -2097,7 +2213,13 @@ async function loadMatches() {
       </div>`;
     }).join('');
   } catch (e) {
-    list.innerHTML = '<div class="empty">Failed to load matches</div>';
+    list.innerHTML = renderEmptyState({
+      icon: '♥',
+      title: 'Matches unavailable',
+      text: 'Your worth-it list could not be loaded right now.',
+      ctaLabel: 'Retry',
+      ctaAction: 'loadMatches()',
+    });
   }
 }
 
@@ -2383,7 +2505,13 @@ async function loadRequests() {
           <button class="btn-ghost" style="font-size:12px;padding:6px 14px;" onclick="respondRequest(${r.RequestID},'declined')">Decline</button>
         </div>
       </div>`;
-    }).join('') : '<div class="empty"><div class="empty-text">No incoming requests</div></div>';
+    }).join('') : renderEmptyState({
+      icon: '✧',
+      title: 'No requests right now',
+      text: 'When someone wants a deeper compatibility reading, it will show up here first.',
+      ctaLabel: 'Browse profiles',
+      ctaAction: "showSection('browse')",
+    });
 
     sent.innerHTML = sentReqs.length ? sentReqs.map(r => `
       <div class="request-card">
@@ -2394,7 +2522,13 @@ async function loadRequests() {
         </div>
         <span class="compat-badge ${r.Status === 'pending' ? 'average' : r.Status === 'accepted' ? 'good' : 'poor'}">${escapeHtml(r.Status)}</span>
       </div>`).join('')
-      : '<div class="empty"><div class="empty-text">No sent requests</div></div>';
+      : renderEmptyState({
+          icon: '✧',
+          title: 'No signals sent yet',
+          text: 'Request a deeper reading when someone feels worth more than a passing look.',
+          ctaLabel: 'Browse profiles',
+          ctaAction: "showSection('browse')",
+        });
   } catch (e) { console.error(e); }
 }
 
@@ -2429,14 +2563,32 @@ async function loadHistory() {
         <span class="compat-badge ${labelClass}">${escapeHtml(h.MatchQualityLabel)}</span>
         <div class="history-score">${escapeHtml(h.TotalScore)}</div>
       </div>`;
-    }).join('') : '<div class="empty"><div class="empty-icon">◷</div><div class="empty-text">No readings yet — request one from Browse!</div></div>';
-  } catch (e) { list.innerHTML = '<div class="empty">Failed to load history</div>'; }
+    }).join('') : renderEmptyState({
+      icon: '◷',
+      title: 'No readings saved yet',
+      text: 'Compatibility readings you unlock will stay here when you want the fuller picture again.',
+      ctaLabel: 'Go to Discover',
+      ctaAction: "showSection('browse')",
+    });
+  } catch (e) {
+    list.innerHTML = renderEmptyState({
+      icon: '◷',
+      title: 'Receipts unavailable',
+      text: 'Saved readings could not be loaded right now.',
+      ctaLabel: 'Retry',
+      ctaAction: 'loadHistory()',
+    });
+  }
 }
 
 async function loadAdminReports() {
   const list = document.getElementById('admin-reports-list');
   if (!currentUser?.isAdmin) {
-    list.innerHTML = '<div class="empty"><div class="empty-text">Admin access required</div></div>';
+    list.innerHTML = renderEmptyState({
+      icon: '⚑',
+      title: 'Admin access required',
+      text: 'This moderation area is only visible to staff accounts.',
+    });
     return;
   }
   list.innerHTML = '<div class="empty"><div class="spinner"></div></div>';
@@ -2462,9 +2614,19 @@ async function loadAdminReports() {
         ${report.Details ? `<div class="admin-report-details">${escapeHtml(report.Details)}</div>` : ''}
         ${report.actions?.length ? `<div class="admin-action-log">${report.actions.map(action => `<div class="admin-action-item"><strong>${escapeHtml(action.ActionType)}</strong> by ${escapeHtml(action.AdminUsername)} · ${new Date(action.CreatedAt).toLocaleString()}${action.Note ? ` · ${escapeHtml(action.Note)}` : ''}</div>`).join('')}</div>` : ''}
       </div>
-    `).join('') : '<div class="empty"><div class="empty-text">No reports in this state</div></div>';
+    `).join('') : renderEmptyState({
+      icon: '⚑',
+      title: 'No reports in this state',
+      text: 'Nothing currently needs moderation attention in this filter.',
+    });
   } catch (e) {
-    list.innerHTML = `<div class="empty"><div class="empty-text">${escapeHtml(e.message)}</div></div>`;
+    list.innerHTML = renderEmptyState({
+      icon: '⚑',
+      title: 'Moderation unavailable',
+      text: e.message,
+      ctaLabel: 'Retry',
+      ctaAction: 'loadAdminReports()',
+    });
   }
 }
 
@@ -2515,7 +2677,13 @@ async function loadChatList() {
         </div>
       </div>`;
     }).join('')
-      : '<div style="padding:16px;font-size:13px;color:var(--ink-soft);">No matches yet</div>';
+      : renderEmptyState({
+          icon: '✉',
+          title: 'No Love Letters yet',
+          text: 'Once a match feels mutual, the first message should feel chosen.',
+          ctaLabel: 'Go to Discover',
+          ctaAction: "showSection('browse')",
+        });
 
     if (activeChatMatchId) {
       const m = matches.find(m => m.MatchID === activeChatMatchId);
@@ -2558,7 +2726,11 @@ function renderMessages(messages) {
   const container = document.getElementById('chat-msgs');
   if (!container) return;
   if (!messages.length) {
-    container.innerHTML = '<div class="empty"><div class="empty-text">No messages yet — say hello! ✦</div></div>';
+    container.innerHTML = renderEmptyState({
+      icon: '✉',
+      title: 'No Love Letters yet',
+      text: 'The first message here should feel intentional, not automatic.',
+    });
     return;
   }
   container.innerHTML = messages.map(m => {
@@ -2627,43 +2799,53 @@ function renderMyProfile() {
     </div>
     <div class="card" style="margin-top:1.5rem;">
       <div class="card-title">Update dating profile</div>
-      <div class="form-row" style="max-width:700px;">
-        <div class="form-group">
-          <label>Relationship intent</label>
-          <select id="edit-intent">
-            <option value="marriage" ${u.relationshipIntent === 'marriage' ? 'selected' : ''}>Marriage-minded</option>
-            <option value="long-term" ${u.relationshipIntent === 'long-term' ? 'selected' : ''}>Long-term relationship</option>
-            <option value="serious-dating" ${u.relationshipIntent === 'serious-dating' ? 'selected' : ''}>Serious dating</option>
-            <option value="exploring" ${u.relationshipIntent === 'exploring' ? 'selected' : ''}>Exploring slowly</option>
-          </select>
+      <div class="form-section">
+        <div class="form-section-title">Relationship intent</div>
+        <div class="form-row" style="max-width:700px;">
+          <div class="form-group">
+            <label>Relationship intent</label>
+            <select id="edit-intent">
+              <option value="marriage" ${u.relationshipIntent === 'marriage' ? 'selected' : ''}>Marriage-minded</option>
+              <option value="long-term" ${u.relationshipIntent === 'long-term' ? 'selected' : ''}>Long-term relationship</option>
+              <option value="serious-dating" ${u.relationshipIntent === 'serious-dating' ? 'selected' : ''}>Serious dating</option>
+              <option value="exploring" ${u.relationshipIntent === 'exploring' ? 'selected' : ''}>Exploring slowly</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Looking for</label>
+            <select id="edit-looking-for">
+              <option value="woman" ${u.lookingFor === 'woman' ? 'selected' : ''}>Women</option>
+              <option value="man" ${u.lookingFor === 'man' ? 'selected' : ''}>Men</option>
+              <option value="everyone" ${u.lookingFor === 'everyone' ? 'selected' : ''}>Everyone</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label>Looking for</label>
-          <select id="edit-looking-for">
-            <option value="woman" ${u.lookingFor === 'woman' ? 'selected' : ''}>Women</option>
-            <option value="man" ${u.lookingFor === 'man' ? 'selected' : ''}>Men</option>
-            <option value="everyone" ${u.lookingFor === 'everyone' ? 'selected' : ''}>Everyone</option>
-          </select>
+      </div>
+      <div class="form-section">
+        <div class="form-section-title">Profile identity</div>
+        <div class="form-group" style="max-width:700px;">
+          <label>Profile headline</label>
+          <input type="text" id="edit-prompt" maxlength="160" value="${escapeAttr(u.profilePrompt || '')}" />
         </div>
-      </div>
-      <div class="form-group" style="max-width:700px;">
-        <label>Profile headline</label>
-        <input type="text" id="edit-prompt" maxlength="160" value="${escapeAttr(u.profilePrompt || '')}" />
-      </div>
-      <div class="form-group" style="max-width:400px;">
-        <label>Bio</label>
-        <textarea id="edit-bio" rows="3" style="width:100%;padding:10px;border:.5px solid var(--border-strong);border-radius:8px;font-family:var(--font-body);font-size:14px;background:var(--parchment);">${escapeHtml(u.bio || '')}</textarea>
-      </div>
-      <div class="form-group" style="max-width:400px;">
-        <label>Profile Photo</label>
-        <input type="file" id="edit-avatar" accept="image/*" />
+        <div class="form-group" style="max-width:700px;">
+          <label>Bio</label>
+          <textarea id="edit-bio" rows="3" style="resize:vertical;">${escapeHtml(u.bio || '')}</textarea>
+          <p class="form-hint">Keep it specific. Write what someone would actually need to know to take you seriously.</p>
+        </div>
+        <div class="form-group" style="max-width:520px;">
+          <label>Profile photo</label>
+          <div class="file-input-wrap">
+            <input type="file" id="edit-avatar" accept="image/*" />
+            <p class="form-hint">This still updates your main photo only. Full gallery editing stays separate for now.</p>
+          </div>
+        </div>
       </div>
       <button class="btn-primary" onclick="saveProfile()">Save changes</button>
-      <div style="margin-top:1.75rem;padding-top:1.25rem;border-top:.5px solid var(--border);max-width:700px;">
-        <div class="card-title" style="color:var(--accent-red);margin-bottom:.5rem;">Danger zone</div>
-        <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:.9rem;">Delete your profile, matches, messages, readings, and stored photos permanently.</div>
-        <button class="btn-danger" onclick="deleteProfile()">Delete profile</button>
-      </div>
+    </div>
+    <div class="card danger-card" style="margin-top:1.25rem;max-width:700px;">
+      <div class="card-title">Danger zone</div>
+      <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-bottom:.9rem;">Delete your profile, matches, messages, readings, and stored photos permanently.</div>
+      <button class="btn-danger" onclick="deleteProfile()">Delete profile</button>
     </div>`;
 }
 

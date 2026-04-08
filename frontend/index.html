@@ -126,24 +126,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(18,11,13,0.88);backdrop-fi
 .public-grid-two{display:grid;grid-template-columns:1.02fr .98fr;gap:1.75rem;align-items:start;}
 .public-stack{display:grid;gap:16px;}
 .landing-carousel-band{padding:1.5rem 2rem 5.75rem;position:relative;}
-.landing-carousel-shell{max-width:1100px;margin:0 auto;position:relative;}
-.landing-carousel-shell::before{content:'';position:absolute;left:0;right:0;top:88px;height:1px;background:linear-gradient(90deg, rgba(213,154,133,.32), rgba(213,154,133,.08) 45%, transparent 100%);}
-.landing-carousel-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px;margin-bottom:2rem;}
-.landing-carousel-copy{max-width:680px;}
-.landing-carousel-label{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:.9rem;}
-.landing-carousel-label::before{content:'';width:18px;height:1px;background:rgba(213,154,133,.42);}
-.landing-carousel-title{font-family:var(--font-display);font-size:42px;line-height:.95;color:var(--ink);margin-bottom:.75rem;}
-.landing-carousel-subtitle{font-size:15px;line-height:1.85;color:var(--ink-soft);}
+.landing-carousel-shell{max-width:1100px;margin:0 auto;position:relative;padding-left:30px;}
+.landing-carousel-shell::before{content:'';position:absolute;left:0;top:0;bottom:58px;width:1px;background:linear-gradient(180deg, rgba(213,154,133,.36), rgba(213,154,133,.12) 55%, transparent 100%);}
+.landing-carousel-head{display:flex;justify-content:flex-end;align-items:center;margin-bottom:1.35rem;}
 .landing-carousel-controls{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .landing-carousel-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(213,154,133,.24);background:rgba(18,11,13,.78);color:var(--ink);font-size:17px;cursor:pointer;transition:transform var(--ease-premium),border-color var(--ease-premium),background var(--ease-premium);}
 .landing-carousel-btn:hover{transform:translateY(-2px);border-color:rgba(213,154,133,.48);background:rgba(49,33,37,.96);}
 .landing-carousel-viewport{overflow:hidden;}
 .landing-carousel-track{display:flex;transition:transform 480ms ease;}
-.landing-carousel-slide{min-width:100%;display:grid;grid-template-columns:minmax(0,.92fr) minmax(320px,1.08fr);gap:0;align-items:start;}
-.landing-carousel-card{padding:18px 34px 18px 0;border-right:1px solid rgba(213,154,133,.18);background:none;box-shadow:none;min-height:100%;}
-.landing-carousel-card .section-title{margin-bottom:.9rem;font-size:42px;max-width:10ch;}
-.landing-carousel-card .section-copy{margin-bottom:0;max-width:36ch;}
-.landing-carousel-panel{display:grid;gap:14px;padding-left:34px;}
+.landing-carousel-slide{min-width:100%;display:grid;grid-template-columns:1fr;gap:0;align-items:start;}
+.landing-carousel-panel{display:grid;gap:14px;}
 .landing-carousel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .landing-carousel-dots{display:flex;gap:10px;justify-content:center;margin-top:1.9rem;}
 .landing-carousel-dot{width:10px;height:10px;border-radius:50%;border:none;padding:0;background:rgba(244,233,222,.24);cursor:pointer;transition:transform var(--ease-premium),background var(--ease-premium);}
@@ -543,13 +535,8 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .teaser-strip{grid-template-columns:1fr;padding:0 1.25rem 2.5rem;}
   .trust-grid,.landing-carousel-grid,.public-grid-two,.landing-carousel-slide{grid-template-columns:1fr;}
   .landing-carousel-band{padding:1rem 1.25rem 4rem;}
-  .landing-carousel-shell::before{top:74px;}
-  .landing-carousel-head{grid-template-columns:1fr;align-items:flex-start;}
-  .landing-carousel-title{font-size:34px;}
-  .landing-carousel-card{padding:0 0 1.4rem;border-right:none;border-bottom:1px solid rgba(213,154,133,.16);}
-  .landing-carousel-card .section-title{font-size:30px;max-width:none;}
-  .landing-carousel-card .section-copy{max-width:none;}
-  .landing-carousel-panel{padding:1.4rem 0 0;}
+  .landing-carousel-shell{padding-left:18px;}
+  .landing-carousel-shell::before{bottom:52px;}
   .app-layout{grid-template-columns:1fr;}.sidebar{display:none;}
   .features-grid{grid-template-columns:1fr;}
   .difference-inner{grid-template-columns:1fr;}
@@ -589,7 +576,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .teaser-strip{grid-template-columns:1fr;padding:0 1.25rem 2.5rem;}
   .public-section{padding:5rem 1.25rem;}
   .landing-carousel-band{padding:1rem 1.25rem 4rem;}
-  .landing-carousel-shell::before{top:78px;}
+  .landing-carousel-shell{padding-left:18px;}
   .cta-inner{flex-direction:column;align-items:flex-start;}
   .cta-actions{width:100%;}
   .cta-actions .btn-lg{width:100%;text-align:center;}
@@ -597,8 +584,6 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .how-hero-grid{grid-template-columns:1fr;}
   .difference-inner{grid-template-columns:1fr;}
   .signal-grid,.landing-carousel-slide,.landing-carousel-grid{grid-template-columns:1fr;}
-  .landing-carousel-card{padding:0 0 1.5rem;border-right:none;border-bottom:1px solid rgba(213,154,133,.16);}
-  .landing-carousel-panel{padding:1.5rem 0 0;}
   .detail-grid{grid-template-columns:1fr;}
   .auth-panel{max-width:none;}
   .auth-shell nav{padding:0 1rem;min-height:54px;height:54px;flex-wrap:nowrap;}
@@ -610,10 +595,7 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
   .profile-astro{font-size:11px;}
   .profile-score-row{align-items:flex-start;gap:10px;flex-direction:column;}
   .mobile-nav-item{padding:9px 4px;font-size:10px;}
-  .landing-carousel-shell::before{top:68px;}
-  .landing-carousel-title{font-size:30px;}
-  .landing-carousel-subtitle{font-size:14px;}
-  .landing-carousel-card .section-title{font-size:28px;}
+  .landing-carousel-shell{padding-left:14px;}
   .auth-wrap{padding:1.5rem .9rem 2.5rem;}
   .auth-panel{padding:1.2rem;border-radius:20px;}
 }
@@ -706,11 +688,6 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
     <section class="landing-carousel-band">
       <div class="landing-carousel-shell" id="landing-carousel" aria-label="Landing highlights carousel">
         <div class="landing-carousel-head">
-          <div class="landing-carousel-copy">
-            <div class="landing-carousel-label">A shorter, clearer landing page</div>
-            <div class="landing-carousel-title">Everything important, without four long scroll stops.</div>
-            <div class="landing-carousel-subtitle">The homepage now loops through the same key ideas in one moving band, so the story stays intact without turning the landing experience into a marathon.</div>
-          </div>
           <div class="landing-carousel-controls">
             <button class="landing-carousel-btn" type="button" aria-label="Previous slide" onclick="moveLandingCarousel(-1)">←</button>
             <button class="landing-carousel-btn" type="button" aria-label="Next slide" onclick="moveLandingCarousel(1)">→</button>
@@ -719,35 +696,22 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
         <div class="landing-carousel-viewport">
           <div class="landing-carousel-track" id="landing-carousel-track">
             <article class="landing-carousel-slide">
-              <div class="landing-carousel-card">
-                <div class="section-label">Why this is different</div>
-                <div class="section-title">Built for people who want direction, not just dopamine.</div>
-                <div class="section-copy">Ashtakoota does not pretend volume is the same thing as value. It slows the pace, puts intent on the profile, and makes compatibility easier to understand before you burn time on a connection that never had shape.</div>
-              </div>
               <div class="landing-carousel-panel landing-carousel-grid">
-                <div class="feature-card">
-                  <div class="feature-num">01</div>
-                  <div class="feature-title">Intent before intrigue</div>
-                  <div class="feature-desc">Profiles tell you what someone is here for before you start projecting your own meaning onto mixed signals.</div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Intent before intrigue</div>
+                  <div class="teaser-copy">Profiles tell you what someone is here for before you start projecting your own meaning onto mixed signals.</div>
                 </div>
-                <div class="feature-card">
-                  <div class="feature-num">02</div>
-                  <div class="feature-title">Compatibility with context</div>
-                  <div class="feature-desc">The reading is not random mysticism. It is a structured system translated into modern relationship language.</div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Compatibility with context</div>
+                  <div class="teaser-copy">The reading is not random mysticism. It is a structured system translated into modern relationship language.</div>
                 </div>
-                <div class="feature-card">
-                  <div class="feature-num">03</div>
-                  <div class="feature-title">Slower, more deliberate contact</div>
-                  <div class="feature-desc">Even the first message asks for more care than “hey”, so the app filters out a lot of low-effort behavior early.</div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Slower, more deliberate contact</div>
+                  <div class="teaser-copy">Even the first message asks for more care than “hey”, so the app filters out a lot of low-effort behavior early.</div>
                 </div>
               </div>
             </article>
             <article class="landing-carousel-slide">
-              <div class="landing-carousel-card">
-                <div class="section-label">Why people stay</div>
-                <div class="section-title">It makes dating feel calmer.</div>
-                <div class="section-copy">You spend less time decoding, less time second-guessing, and more time deciding whether the person in front of you is actually worth taking seriously.</div>
-              </div>
               <div class="landing-carousel-panel landing-carousel-grid">
                 <div class="teaser-card">
                   <div class="teaser-title">Clarity reduces noise</div>
@@ -764,56 +728,34 @@ box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
               </div>
             </article>
             <article class="landing-carousel-slide">
-              <div class="landing-carousel-card">
-                <div class="section-label">How it works</div>
-                <div class="section-title">Simple flow. Less chaos.</div>
-                <div class="section-copy">Create a serious profile, add your birth details once, and browse people with far more context than a swipe stack gives you. When the interest is mutual, the deeper reading becomes available.</div>
-              </div>
-              <div class="landing-carousel-panel">
-                <div class="story-step">
-                  <div class="story-step-num">1</div>
-                  <div>
-                    <div class="story-step-title">Create a profile with intent</div>
-                    <div class="story-step-copy">Say what you want, who you want to meet, and what kind of connection you are genuinely open to.</div>
-                  </div>
+              <div class="landing-carousel-panel landing-carousel-grid">
+                <div class="teaser-card">
+                  <div class="teaser-title">Create a profile with intent</div>
+                  <div class="teaser-copy">Say what you want, who you want to meet, and what kind of connection you are genuinely open to.</div>
                 </div>
-                <div class="story-step">
-                  <div class="story-step-num">2</div>
-                  <div>
-                    <div class="story-step-title">Let the app derive the signals</div>
-                    <div class="story-step-copy">Birth details are used once so compatibility markers can be translated into plain-English relationship cues.</div>
-                  </div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Let the app derive the signals</div>
+                  <div class="teaser-copy">Birth details are used once so compatibility markers can be translated into plain-English relationship cues.</div>
                 </div>
-                <div class="story-step">
-                  <div class="story-step-num">3</div>
-                  <div>
-                    <div class="story-step-title">Only go deeper when it matters</div>
-                    <div class="story-step-copy">The strongest detail reveals itself after interest becomes mutual instead of overwhelming the first impression.</div>
-                  </div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Only go deeper when it matters</div>
+                  <div class="teaser-copy">The strongest detail reveals itself after interest becomes mutual instead of overwhelming the first impression.</div>
                 </div>
               </div>
             </article>
             <article class="landing-carousel-slide">
-              <div class="landing-carousel-card">
-                <div class="section-label">Compatibility, explained</div>
-                <div class="section-title">Eight signals. Human meaning first.</div>
-                <div class="section-copy">You do not need to know the traditional framework before the product becomes useful. Ashtakoota translates compatibility into shared pace, long-term harmony, emotional support, values fit, and other relationship signals that are easier to understand in real life.</div>
-              </div>
-              <div class="landing-carousel-panel">
-                <div class="signal-card">
-                  <div class="signal-tag">Signal example</div>
-                  <div class="signal-name">Shared pace</div>
-                  <div class="signal-copy">How naturally two people move through closeness, stress, and everyday emotional rhythm.</div>
+              <div class="landing-carousel-panel landing-carousel-grid">
+                <div class="teaser-card">
+                  <div class="teaser-title">Shared pace</div>
+                  <div class="teaser-copy">How naturally two people move through closeness, stress, and everyday emotional rhythm.</div>
                 </div>
-                <div class="signal-card">
-                  <div class="signal-tag">Signal example</div>
-                  <div class="signal-name">Long-term harmony</div>
-                  <div class="signal-copy">Whether the connection has a steadier emotional foundation over time instead of relying on short-term chemistry alone.</div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Long-term harmony</div>
+                  <div class="teaser-copy">Whether the connection has a steadier emotional foundation over time instead of relying on short-term chemistry alone.</div>
                 </div>
-                <div class="signal-card">
-                  <div class="signal-tag">Inspired by</div>
-                  <div class="signal-name">Ashtakoota tradition</div>
-                  <div class="signal-copy">Culturally rooted, translated for a modern dating product, and designed to feel useful even if this is your first exposure to the framework.</div>
+                <div class="teaser-card">
+                  <div class="teaser-title">Ashtakoota, translated</div>
+                  <div class="teaser-copy">Culturally rooted, translated for a modern dating product, and designed to feel useful even if this is your first exposure to the framework.</div>
                 </div>
               </div>
             </article>

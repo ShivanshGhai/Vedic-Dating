@@ -8,7 +8,7 @@ SOURCE schema.sql;
 
 -- Demo login for all seeded users:
 --   password: Part3Demo!
-SET @demo_password_hash = '$2y$10$ueksWU.C8Te05yoXYJl9C.swQ.XBe0n8IoFLNu3MwIIlppdqacRqy';
+SET @demo_password_hash = '$2b$10$ueksWU.C8Te05yoXYJl9C.swQ.XBe0n8IoFLNu3MwIIlppdqacRqy';
 
 INSERT INTO USER (
   Username, Email, PasswordHash, DateOfBirth, TimeOfBirth, BirthLocation,

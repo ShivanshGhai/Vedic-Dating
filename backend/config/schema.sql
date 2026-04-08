@@ -248,8 +248,8 @@ CREATE TABLE INVOLVES (
     MatchID INT NOT NULL,
     UserA INT NOT NULL,
     UserB INT NOT NULL,
-    UserLowID INT AS (LEAST(UserA, UserB)) STORED,
-    UserHighID INT AS (GREATEST(UserA, UserB)) STORED,
+    UserLowID INT NOT NULL,
+    UserHighID INT NOT NULL,
     PRIMARY KEY (MatchID),
     UNIQUE KEY uq_involves_pair (UserLowID, UserHighID),
     CONSTRAINT fk_involves_match FOREIGN KEY (MatchID) REFERENCES MATCH_RECORD(MatchID)
@@ -283,8 +283,8 @@ CREATE TABLE COMPATIBILITY_EVAL (
     EvaluatedAtTimestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     EvalUser1ID INT NOT NULL,
     EvalUser2ID INT NOT NULL,
-    EvalUserLowID INT AS (LEAST(EvalUser1ID, EvalUser2ID)) STORED,
-    EvalUserHighID INT AS (GREATEST(EvalUser1ID, EvalUser2ID)) STORED,
+    EvalUserLowID INT NOT NULL,
+    EvalUserHighID INT NOT NULL,
     RequestID INT,
     PRIMARY KEY (EvalID),
     UNIQUE KEY uq_eval_pair (EvalUserLowID, EvalUserHighID),
@@ -365,6 +365,8 @@ BEGIN
     SET NEW.UserA = NEW.UserB;
     SET NEW.UserB = tmp_user_id;
   END IF;
+  SET NEW.UserLowID = NEW.UserA;
+  SET NEW.UserHighID = NEW.UserB;
 END$$
 
 CREATE TRIGGER trg_eval_no_self
@@ -384,6 +386,8 @@ BEGIN
     SET NEW.EvalUser1ID = NEW.EvalUser2ID;
     SET NEW.EvalUser2ID = tmp_eval_user;
   END IF;
+  SET NEW.EvalUserLowID = NEW.EvalUser1ID;
+  SET NEW.EvalUserHighID = NEW.EvalUser2ID;
 END$$
 
 CREATE TRIGGER trg_creq_no_self
